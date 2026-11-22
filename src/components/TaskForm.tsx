@@ -27,6 +27,7 @@ function TaskForm({ onAddTask }: TaskFormProps) {
       <label htmlFor="task-title">Task title</label>
 
       <input
+      className="border border-gray-300 rounded px-2 py-1 mr-2"
         id="task-title"
         type="text"
         value={title}
@@ -34,7 +35,9 @@ function TaskForm({ onAddTask }: TaskFormProps) {
         placeholder="Enter a task"
       />
 
-      <button type="submit">Add Task</button>
+      <button className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700">
+        Add Task
+      </button>
     </form>
   );
 }
