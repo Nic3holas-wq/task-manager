@@ -69,7 +69,7 @@ describe('TaskForm', () => {
       render(<TaskForm onAddTask={mockAddTask}/>);
       const input = screen.getByRole('textbox', {name: /task title/i});
 
-    user.type(input, 'Learn React Testing');
+    await user.type(input, 'Learn React Testing');
 
     await user.click(
         screen.getByRole('button', { name: /add task/i})
@@ -96,13 +96,20 @@ it('should not submit whitespace-only tasks', async () => {
   render(<TaskForm onAddTask={mockAddTask} />);
 
   const input = screen.getByRole('textbox', {
-    name: /task title/i
+    name: /task title/i,
   });
+
+  // Check the initial input value
+  expect(input).toHaveValue('');
 
   await user.type(input, '   ');
 
-  console.log('Actual value:', input.getAttribute('value'));
-  console.log('Current value:', (input as HTMLInputElement).value);
+  // Check what was actually typed
+  console.log('Input value:', JSON.stringify(
+    (input as HTMLInputElement).value
+  ));
+
+  expect(input).toHaveValue('   ');
 
   await user.click(
     screen.getByRole('button', { name: /add task/i })
